@@ -15,7 +15,7 @@ Requirements are usually built into most Linux distributions:
 
 Just make a new directory where you want the wallpapers to be placed and installs, and run the following command:
 
-    wget https://github.com/chenasraf/8BitDay-Linux/raw/master/install.sh
+    wget https://github.com/chenasraf/BitDay-Linux/raw/master/install.sh
     
 Then just make sure you have execute permissions on the install.sh file:
 
