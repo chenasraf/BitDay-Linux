@@ -9,7 +9,8 @@ Requirements are usually built into most Linux distributions:
 
 * **wget** to download the zip
 * **tar** to extract the downloaded zip
-* 
+
+
 ## How to use?
 
 Just make a new directory where you want the wallpapers to be placed and installs, and run the following command:
