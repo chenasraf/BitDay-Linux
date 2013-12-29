@@ -115,13 +115,13 @@ case $yn in
 		# This creates a file in /etc/pm/sleep.d which runs on system suspend & resume, but this script uses case to run only on resume
 		# sudo -k makes sure password is prompted regardless of its cache state
 		# sh -c is required for sudo to perform inside ore-written script
-		sudo -k sh -c "echo -e \"case \"\${1}\" in\n\tresume|thaw)\n\t\t${pwd}/update.sh\n\t;;\nesac\" > /etc/pm/sleep.d/RotatingWallpaper.sh"
+		sudo -k bash -c "echo -e \"case \"\$\{1\}\" in\n\tresume|thaw)\n\t\t${pwd}/update.sh\n\t;;\nesac\" > /etc/pm/sleep.d/RotatingWallpaper.sh"
 		if [ $? -ne 0 ]; then # Error code is not 0 (not success)
 			echo "ERROR: Return from suspension script not created.";
 		else
 			# Chmod & chown the new file
-			sudo sh -c "chmod +x /etc/pm/sleep.d/RotatingWallpaper.sh"
-			sudo sh -c "chown $USER /etc/pm/sleep.d/RotatingWallpaper.sh"
+			sudo bash -c "chmod +x /etc/pm/sleep.d/RotatingWallpaper.sh"
+			sudo bash -c "chown $USER /etc/pm/sleep.d/RotatingWallpaper.sh"
 		fi
 		;;
 esac
