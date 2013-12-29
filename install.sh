@@ -10,12 +10,7 @@ echo "*** Auto Installer: http://www.reddit.com/u/OhMrBigshot                ***
 echo $sep
 echo
 
-
-echo "* Changing permissions... [1/5]"
-chmod +x update.sh
-echo
-
-echo "* Select a resolution (files will be downloaded): [2/5]"
+echo "* Select a resolution (files will be downloaded): [1/5]"
 echo "    1) 1280x720"
 echo "    2) 1280x800"
 echo "    3) 1366x768"
@@ -52,15 +47,19 @@ if [[ -z $file ]]; then
 fi
 download="https://github.com/chenasraf/8BitDay-Linux/raw/master/tars/BitDay-$file.tar.gz"
 
-echo "* Downloading scripts & wallpapers, please wait... [3/5]"
+echo "* Downloading scripts & wallpapers, please wait... [2/5]"
 echo
 if [[ -e "./BitDay-$file.tar.gz" ]]; then
 	echo "Wallpaper pack already exists."
 else
 	wget $download
-	wget "https://github.com/chenasraf/8BitDay-Linux/raw/master/update.sh"
-	wget "https://github.com/chenasraf/8BitDay-Linux/raw/master/uninstall.sh"
 fi
+wget "https://github.com/chenasraf/8BitDay-Linux/raw/master/update.sh"
+wget "https://github.com/chenasraf/8BitDay-Linux/raw/master/uninstall.sh"
+
+echo "* Changing permissions... [3/5]"
+chmod +x update.sh uninstall.sh
+echo
 
 echo
 echo "* Extracting zip... [4/5]"
