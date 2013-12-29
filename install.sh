@@ -45,7 +45,7 @@ done
 if [[ -z $file ]]; then
 	file=2880x1800
 fi
-download="https://github.com/chenasraf/8BitDay-Linux/raw/master/tars/BitDay-$file.tar.gz"
+download="https://github.com/chenasraf/BitDay-Linux/raw/master/tars/BitDay-$file.tar.gz"
 
 echo "* Downloading scripts & wallpapers, please wait... [2/5]"
 echo
@@ -54,8 +54,8 @@ if [[ -e "./BitDay-$file.tar.gz" ]]; then
 else
 	wget $download
 fi
-wget "https://github.com/chenasraf/8BitDay-Linux/raw/master/update.sh"
-wget "https://github.com/chenasraf/8BitDay-Linux/raw/master/uninstall.sh"
+wget "https://github.com/chenasraf/BitDay-Linux/raw/master/update.sh"
+wget "https://github.com/chenasraf/BitDay-Linux/raw/master/uninstall.sh"
 
 echo "* Changing permissions... [3/5]"
 chmod +x update.sh uninstall.sh
