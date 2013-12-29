@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pwd=`pwd`
+pwd=`pwd` # Save current directory
 
 sep="--------------------------------------------------------------------------"
 echo $sep
@@ -24,6 +24,7 @@ echo "    10) 2560x1600"
 echo "    11) 2880x1800"
 echo
 
+# Only accept proper input
 while read -p "    Type a number (1-11): " input; do
 	if [[ -n $input ]]; then
 		case $input in
@@ -43,30 +44,42 @@ while read -p "    Type a number (1-11): " input; do
 done
 
 if [[ -z $file ]]; then
-	file=2880x1800
+	file="2880x1800" # Never supposed to get here but... just in case
 fi
+
+# Actual download link for tar
 download="https://github.com/chenasraf/BitDay-Linux/raw/master/tars/BitDay-$file.tar.gz"
 
+echo $sep
 echo "* Downloading scripts & wallpapers, please wait... [2/5]"
 echo
+
+# Check if file already exists
 if [[ -e "./BitDay-$file.tar.gz" ]]; then
-	echo "Wallpaper pack already exists."
+	echo "Wallpaper pack already exists, skipping download."
 else
 	wget $download
 fi
+
+# Download update & uninstall scripts
 wget "https://github.com/chenasraf/BitDay-Linux/raw/master/update.sh"
 wget "https://github.com/chenasraf/BitDay-Linux/raw/master/uninstall.sh"
 
+
+echo $sep
 echo "* Changing permissions... [3/5]"
 chmod +x update.sh uninstall.sh
 echo
 
 echo
 echo "* Extracting zip... [4/5]"
+# Extract the tar
+# Wildcards are leftovers from before the structure was flat... keeping in case that changes again or more files are added
 tar xvf "BitDay-$file.tar.gz" --wildcards '*.png'
 rm -f "BitDay-$file.tar.gz"
 echo "Done."
 
+echo $sep
 echo "* Creating cron jobs... [5/5]"
 echo
 
@@ -77,7 +90,7 @@ case $yn in
 		if ! crontab -l | grep -Fxq "$line"; then
 			(crontab -l ; echo "$line") | crontab -
 		else
-			echo "[cron already exists, skipping]"
+			echo "- Cron already exists, skipping."
 		fi
 		;;
 esac
@@ -90,7 +103,7 @@ case $yn in
 		if ! crontab -l | grep -Fxq "$line"; then
 			(crontab -l ; echo "$line") | crontab -
 		else
-			echo "[cron already exists, skipping]"
+			echo "- Cron already exists, skipping."
 		fi
 		;;
 esac
@@ -99,10 +112,14 @@ echo
 read -p "Run script after system resume (from suspension)? (requires root) [y/n] " yn
 case $yn in
 	[Yy]*)
+		# This creates a file in /etc/pm/sleep.d which runs on system suspend & resume, but this script uses case to run only on resume
+		# sudo -k makes sure password is prompted regardless of its cache state
+		# sh -c is required for sudo to perform inside ore-written script
 		sudo -k sh -c "echo -e \"case \"\${1}\" in\n\tresume|thaw)\n\t\t${pwd}/update.sh\n\t;;\nesac\" > /etc/pm/sleep.d/RotatingWallpaper.sh"
-		if [ $? -ne 0 ]; then
-			echo " --> ERROR: Return from suspension script not created";
-		else			
+		if [ $? -ne 0 ]; then # Error code is not 0 (not success)
+			echo "ERROR: Return from suspension script not created.";
+		else
+			# Chmod & chown the new file
 			sudo sh -c "chmod +x /etc/pm/sleep.d/RotatingWallpaper.sh"
 			sudo sh -c "chown $USER /etc/pm/sleep.d/RotatingWallpaper.sh"
 		fi
