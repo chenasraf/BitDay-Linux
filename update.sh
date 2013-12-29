@@ -1,31 +1,34 @@
 #!/bin/bash
 
+# Original script by http://www.reddit.com/u/javajames64
+# Updates by http://www.reddit.com/u/OhMrBigshot
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 sessionfile=`find "${HOME}/.dbus/session-bus/" -type f`
 export `grep "DBUS_SESSION_BUS_ADDRESS" "${sessionfile}" | sed '/^#/d'`
 
 files=(
-    01-Morning.png
-    02-Late-Morning.png
-    03-Afternoon.png
-    04-Late-Afternoon.png
-    05-Evening.png
-    06-Late-Evening.png
-    07-Night.png
-    08-Late-Night.png
+	01-Morning.png
+	02-Late-Morning.png
+	03-Afternoon.png
+	04-Late-Afternoon.png
+	05-Evening.png
+	06-Late-Evening.png
+	07-Night.png
+	08-Late-Night.png
 )
 
 #Timings for the backgrounds in order. Your life may vary.
 timing=(
-    7
-    10
-    12
-    17
-    18
-    19
-    21
-    23
+	7
+	10
+	12
+	17
+	18
+	19
+	21
+	23
 )
 
 hour=`date +%H`
