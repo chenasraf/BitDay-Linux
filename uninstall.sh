@@ -32,7 +32,7 @@ echo
 read -p "Delete this directory and its files? [y/n] " yn
 case $yn in
 	[Yy]* )
-		echo "rm -R $pwd"
+		rm -R $pwd
 		;;
 esac
 echo
