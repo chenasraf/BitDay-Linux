@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 pwd=`pwd`
 
@@ -29,36 +29,43 @@ echo "    10) 2560x1600"
 echo "    11) 2880x1800"
 echo
 
-input=
-while [[ "$input" = "" ]]; do
-	read -p "    Type a number (1-11): " input
+while read -p "    Type a number (1-11): " input; do
+	if [[ -n $input ]]; then
+		case $input in
+			1) file="1280x720"; break;;
+			2) file="1280x800"; break;;
+			3) file="1366x768"; break;;
+			4) file="1440x900"; break;;
+			5) file="1600x900"; break;;
+			6) file="1680x1050"; break;;
+			7) file="1920x1080"; break;;
+			8) file="1920x1200"; break;;
+			9) file="2560x1440"; break;;
+			10) file="2560x1600"; break;;
+			11) file="2880x1800"; break;;
+		esac
+	fi
 done
-
-case $input in
-	1) file="1280x720";;
-	2) file="1280x800";;
-	3) file="1366x768";;
-	4) file="1440x900";;
-	5) file="1600x900";;
-	6) file="1680x1050";;
-	7) file="1920x1080";;
-	8) file="1920x1200";;
-	9) file="2560x1440";;
-	10) file="2560x1600";;
-	11) file="2880x1800";;
-esac
 
 if [[ -z $file ]]; then
 	file=2880x1800
 fi
-download="https://github.com/chenasraf/8BitDay-Linux/raw/master/tars/BitDay-$file.zip"
+download="https://github.com/chenasraf/8BitDay-Linux/raw/master/tars/BitDay-$file.tar.gz"
 
-echo "* Downloading wallpapers, please wait... [3/5]"
+echo "* Downloading scripts & wallpapers, please wait... [3/5]"
 echo
-wget $download
+if [[ -e "./BitDay-$file.tar.gz" ]]; then
+	echo "Wallpaper pack already exists."
+else
+	wget $download
+	wget "https://github.com/chenasraf/8BitDay-Linux/raw/master/update.sh"
+	wget "https://github.com/chenasraf/8BitDay-Linux/raw/master/uninstall.sh"
+fi
+
 echo
 echo "* Extracting zip... [4/5]"
-tar xvf "BitDay-$file.zip" --wildcards '*.png'
+tar xvf "BitDay-$file.tar.gz" --wildcards '*.png'
+rm -f "BitDay-$file.tar.gz"
 echo "Done."
 
 echo "* Creating cron jobs... [5/5]"
