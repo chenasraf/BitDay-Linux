@@ -32,6 +32,7 @@ timing=(
 )
 
 hour=`date +%H`
+hour=$(echo $hour | sed 's/^0*//')
 
 
 # Different desktop environment implementations
