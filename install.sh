@@ -31,17 +31,16 @@ while read -p "    Type a number (1-11): " input; do
 		case $input in
 			1) file="1280x720"; break;;
 			2) file="1280x800"; break;;
-			3) file="1366x768"; break;;
-			4) file="1440x900"; break;;
-			5) file="1600x900"; break;;
-			6) file="1680x1050"; break;;
-			7) file="1920x1080"; break;;
-			8) file="1920x1200"; break;;
-			9) file="2560x1440"; break;;
-			10) file="2560x1600"; break;;
-			11) file="2880x1800"; break;;
-			12) file="3840x2160"; break;;
-			13) file="4096x2304"; break;;
+			3) file="1440x900"; break;;
+			4) file="1600x900"; break;;
+			5) file="1680x1050"; break;;
+			6) file="1920x1080"; break;;
+			7) file="1920x1200"; break;;
+			8) file="2560x1440"; break;;
+			9) file="2560x1600"; break;;
+			10) file="2880x1800"; break;;
+			11) file="3840x2160"; break;;
+			12) file="4096x2304"; break;;
 		esac
 	fi
 done
