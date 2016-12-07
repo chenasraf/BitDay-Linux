@@ -9,27 +9,22 @@ sessionfile=`find "${HOME}/.dbus/session-bus/" -type f`
 export `grep "DBUS_SESSION_BUS_ADDRESS" "${sessionfile}" | sed '/^#/d'`
 
 files=(
-	01-Morning.png
-	02-Late-Morning.png
-	03-Afternoon.png
-	04-Late-Afternoon.png
-	05-Evening.png
-	06-Late-Evening.png
-	07-Night.png
-	08-Late-Night.png
+  11-Mid-Night.png
+  12-Late-Night.png
+  01-Early-Morning.png
+  02-Mid-Morning.png
+  03-Late-Morning.png
+  04-Early-Afternoon.png
+  05-Mid-Afternoon.png
+  06-Late-Afternoon.png
+  07-Early-Evening.png
+  08-Mid-Evening.png
+  09-Late-Evening.png
+  10-Early-Night.png
 )
 
 #Timings for the backgrounds in order. Your life may vary.
-timing=(
-	7
-	10
-	12
-	17
-	18
-	19
-	21
-	23
-)
+timing=(0 2 4 6 8 10 13 16 18 20 21)
 
 hour=`date +%H`
 hour=$(echo $hour | sed 's/^0*//')
@@ -38,7 +33,7 @@ hour=$(echo $hour | sed 's/^0*//')
 # Different desktop environment implementations
 case $XDG_CURRENT_DESKTOP in
 	Mint|Mate) setcmd="gsettings set org.mate.background picture-uri";;
-	Cinnamon) setcmd="gsettings set org.cinnamon.background picture-uri";;	
+	Cinnamon) setcmd="gsettings set org.cinnamon.background picture-uri";;
 	*) setcmd="gsettings set org.gnome.desktop.background picture-uri";; # GNOME/Unity, default
 esac
 if [[ -z $XDG_CURRENT_DESKTOP ]]; then # Fallback for i3
@@ -47,7 +42,7 @@ if [[ -z $XDG_CURRENT_DESKTOP ]]; then # Fallback for i3
 	esac
 fi
 
-for i in {7..0..-1}; do # Loop backwards through the wallpapers
+for i in {12..0..-1}; do # Loop backwards through the wallpapers
     if [[ $hour -ge ${timing[i]} ]]; then
         $setcmd file://$DIR/${files[i]}
         echo "Wallpaper set to ${files[i]}"

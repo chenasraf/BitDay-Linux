@@ -4,24 +4,25 @@ pwd=`pwd` # Save current directory
 
 sep="--------------------------------------------------------------------------"
 echo $sep
-echo "***               8bit Day Wallpaper Rotator for Linux                 ***" 
-echo "*** Rotator Script: http://www.reddit.com/u/javajames64                ***" 
-echo "*** Auto Installer: http://www.reddit.com/u/OhMrBigshot                ***" 
+echo "***               8bit Day Wallpaper Rotator for Linux                 ***"
+echo "*** Rotator Script: http://www.reddit.com/u/javajames64                ***"
+echo "*** Auto Installer: http://www.reddit.com/u/OhMrBigshot                ***"
 echo $sep
 echo
 
 echo "* Select a resolution (files will be downloaded): [1/5]"
 echo "    1) 1280x720"
 echo "    2) 1280x800"
-echo "    3) 1366x768"
-echo "    4) 1440x900"
-echo "    5) 1600x900"
-echo "    6) 1680x1050"
-echo "    7) 1920x1080"
-echo "    8) 1920x1200"
-echo "    9) 2560x1440"
-echo "    10) 2560x1600"
-echo "    11) 2880x1800"
+echo "    3) 1440x900"
+echo "    4) 1600x900"
+echo "    5) 1680x1050"
+echo "    6) 1920x1080"
+echo "    7) 1920x1200"
+echo "    8) 2560x1440"
+echo "    9) 2560x1600"
+echo "    10) 2880x1800"
+echo "    11) 3840x2160"
+echo "    12) 4096x2304"
 echo
 
 # Only accept proper input
@@ -39,6 +40,8 @@ while read -p "    Type a number (1-11): " input; do
 			9) file="2560x1440"; break;;
 			10) file="2560x1600"; break;;
 			11) file="2880x1800"; break;;
+			12) file="3840x2160"; break;;
+			13) file="4096x2304"; break;;
 		esac
 	fi
 done
