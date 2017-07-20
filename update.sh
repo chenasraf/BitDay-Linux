@@ -45,12 +45,12 @@ fi
 
 for i in ${!timing[@]}; do # Loop through the wallpapers
     if [ ${timing[$i]} -gt $hour ]; then
-        $setcmd $DIR/${files[i-1]}
+        $setcmd$DIR/${files[i-1]}
         echo "Wallpaper set to ${files[i-1]}"
         exit
     fi
 done
 
 # Fallback at last wallpaper if time is not relevant
-$setcmd $DIR/${files[7]}
+$setcmd$DIR/${files[7]}
 echo "Wallpaper set to ${files[7]}"
