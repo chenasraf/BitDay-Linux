@@ -53,5 +53,4 @@ done
 
 # Fallback at last wallpaper if time is not relevant
 $setcmd $DIR/${files[7]}
-echo $setcmd
 echo "Wallpaper set to ${files[7]}"
