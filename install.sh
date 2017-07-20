@@ -77,7 +77,7 @@ echo
 echo "* Extracting zip... [4/5]"
 # Extract the tar
 # Wildcards are leftovers from before the structure was flat... keeping in case that changes again or more files are added
-tar xvf "BitDay-$file.tar.gz" --wildcards '*.png'
+tar xvf "BitDay-$file.tar.gz" --wildcards '*.png' --strip-components=1
 rm -f "BitDay-$file.tar.gz"
 echo "Done."
 
