@@ -42,10 +42,10 @@ if [[ -z $XDG_CURRENT_DESKTOP ]]; then # Fallback for i3
 	esac
 fi
 
-for i in $timing; do # Loop backwards through the wallpapers
-    if (( $hour >= $i )); then
-        $setcmd file://$DIR/${files[i]}
-        echo "Wallpaper set to ${files[i]}"
+for i in ${!timing[@]}; do # Loop through the wallpapers
+    if [ ${timing[$i]} -gt $hour ]; then
+        $setcmd file://$DIR/${files[i-1]}
+        echo "Wallpaper set to ${files[i-1]}"
         exit
     fi
 done
