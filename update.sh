@@ -33,8 +33,9 @@ hour=$(echo $hour | sed 's/^0*//')
 # Different desktop environment implementations
 case $XDG_CURRENT_DESKTOP in
 	Mint|Mate) setcmd="gsettings set org.mate.background picture-uri";;
-	Cinnamon) setcmd="gsettings set org.cinnamon.background picture-uri";;
-	*) setcmd="gsettings set org.gnome.desktop.background picture-uri";; # GNOME/Unity, default
+	MATE) setcmd="gsettings set org.mate.background picture-filename ";;
+	Cinnamon) setcmd="gsettings set org.cinnamon.background picture-uri file://";;
+	*) setcmd="gsettings set org.gnome.desktop.background picture-uri file://";; # GNOME/Unity, default
 esac
 if [[ -z $XDG_CURRENT_DESKTOP ]]; then # Fallback for i3
 	case $DESKTOP_SESSION in
@@ -42,14 +43,14 @@ if [[ -z $XDG_CURRENT_DESKTOP ]]; then # Fallback for i3
 	esac
 fi
 
-for i in $timing; do # Loop backwards through the wallpapers
-    if (( $hour >= $i )); then
-        $setcmd file://$DIR/${files[i]}
-        echo "Wallpaper set to ${files[i]}"
+for i in ${!timing[@]}; do # Loop through the wallpapers
+    if [ ${timing[$i]} -gt $hour ]; then
+        $setcmd$DIR/${files[i-1]}
+        echo "Wallpaper set to ${files[i-1]}"
         exit
     fi
 done
 
 # Fallback at last wallpaper if time is not relevant
-$setcmd file://$DIR/${files[7]}
+$setcmd$DIR/${files[7]}
 echo "Wallpaper set to ${files[7]}"
